@@ -13,19 +13,29 @@ const pool = new Pool({
   port: Number(process.env.DB_PORT || 5432),
 });
 
-app.get('/health', async (req, res) => {
+// Liveness probe:
+// Confirms the Node.js process is alive.
+app.get('/health/live', (req, res) => {
+  res.status(200).json({
+    status: 'alive',
+  });
+});
+
+// Readiness probe:
+// Confirms the application can reach PostgreSQL.
+app.get('/health/ready', async (req, res) => {
   try {
     await pool.query('SELECT 1');
 
     res.status(200).json({
-      status: 'healthy',
+      status: 'ready',
       database: 'connected',
     });
   } catch (error) {
-    console.error('Health check failed:', error.message);
+    console.error('Readiness check failed:', error.message);
 
     res.status(503).json({
-      status: 'unhealthy',
+      status: 'not_ready',
       database: 'disconnected',
     });
   }

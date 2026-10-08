@@ -32,6 +32,7 @@ HEALTHCHECK --interval=30s \
             --start-period=10s \
             --retries=3 \
             CMD wget --no-verbose --tries=1 \
-                http://127.0.0.1:5000/health || exit 1
+                -O - \
+                http://127.0.0.1:5000/health/ready > /dev/null || exit 1
 
 CMD ["node", "index.js"]
