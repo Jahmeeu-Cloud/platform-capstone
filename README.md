@@ -1,10 +1,26 @@
-Good. Your production `terraform.tfvars.example` contains configuration and tags, not secrets, so it can be committed. The README output was blank, which means we can create it from scratch.
+# Project Outcome
+The project successfully demonstrated the deployment of a three-tier containerized application platform on **Amazon EKS**, provisioned using Terraform and integrated with AWS networking, container registries, persistent storage, and load balancing.
 
-One important documentation detail: `kubernetes/platform/addons/metrics-server.yaml` is a ConfigMap recording the Metrics Server version and installation URL. It does not install Metrics Server by itself. We’ll document the actual pinned installation command so someone can reproduce your deployment.
+The implementation successfully achieved:
 
-Let’s create a README that reflects what you have actually deployed and tested—not just what the assignment intended.
+* **Infrastructure as Code:** Reusable Terraform modules for VPC, ECR, and EKS infrastructure.
+* **Remote Terraform State:** Amazon S3 backend with versioning and state locking.
+* **Containerization:** Dockerized frontend and backend applications.
+* **Container Registry:** Private Amazon ECR repositories with image scanning on push and immutable tags.
+* **Kubernetes Workloads:** Deployments and Services for the frontend and backend, plus a PostgreSQL StatefulSet.
+* **Persistent Database Storage:** Encrypted EBS gp3 storage dynamically provisioned through the EBS CSI driver.
+* **Database Persistence Validation:** Verified that test data survived PostgreSQL pod deletion and recreation while the same PVC remained bound.
+* **Application Health Checks:** Startup, readiness, and liveness probes for Kubernetes workloads.
+* **AWS Load Balancing:** AWS Load Balancer Controller and an internet-facing Application Load Balancer provisioned through Kubernetes Ingress.
+* **Horizontal Pod Autoscaling:** Configured CPU-based scaling and validated scale-up and scale-down behaviour under controlled load.
+* **Resource Monitoring:** Metrics Server integration for Kubernetes resource metrics.
+* **Container Security:** Non-root application containers, reduced Linux capabilities, and disabled privilege escalation.
+* **Application Validation:** Verified frontend HTTP responses, backend health endpoints, and backend-to-PostgreSQL connectivity.
 
-Run this from `~/platform-capstone`. It will replace the empty README with project documentation for the architecture, deployment, verification, security controls, and cleanup.
+Most importantly, the project demonstrates how infrastructure, application workloads, persistent data, and scaling policies can work together as a reproducible cloud platform.
+
+It also reinforces an important reliability principle: **restarting a stateful application should not mean losing its persistent data.**
+
 
 Bash
 
@@ -694,29 +710,6 @@ sed -n '1,100p' README.md
 
 ---
 
-# Project Outcome
-
-The project successfully demonstrated the deployment of a three-tier containerized application platform on **Amazon EKS**, provisioned using Terraform and integrated with AWS networking, container registries, persistent storage, and load balancing.
-
-The implementation successfully achieved:
-
-* **Infrastructure as Code:** Reusable Terraform modules for VPC, ECR, and EKS infrastructure.
-* **Remote Terraform State:** Amazon S3 backend with versioning and state locking.
-* **Containerization:** Dockerized frontend and backend applications.
-* **Container Registry:** Private Amazon ECR repositories with image scanning on push and immutable tags.
-* **Kubernetes Workloads:** Deployments and Services for the frontend and backend, plus a PostgreSQL StatefulSet.
-* **Persistent Database Storage:** Encrypted EBS gp3 storage dynamically provisioned through the EBS CSI driver.
-* **Database Persistence Validation:** Verified that test data survived PostgreSQL pod deletion and recreation while the same PVC remained bound.
-* **Application Health Checks:** Startup, readiness, and liveness probes for Kubernetes workloads.
-* **AWS Load Balancing:** AWS Load Balancer Controller and an internet-facing Application Load Balancer provisioned through Kubernetes Ingress.
-* **Horizontal Pod Autoscaling:** Configured CPU-based scaling and validated scale-up and scale-down behaviour under controlled load.
-* **Resource Monitoring:** Metrics Server integration for Kubernetes resource metrics.
-* **Container Security:** Non-root application containers, reduced Linux capabilities, and disabled privilege escalation.
-* **Application Validation:** Verified frontend HTTP responses, backend health endpoints, and backend-to-PostgreSQL connectivity.
-
-Most importantly, the project demonstrates how infrastructure, application workloads, persistent data, and scaling policies can work together as a reproducible cloud platform.
-
-It also reinforces an important reliability principle: **restarting a stateful application should not mean losing its persistent data.**
 
 ## Author
 
