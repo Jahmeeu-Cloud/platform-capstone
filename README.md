@@ -22,9 +22,11 @@ Most importantly, the project demonstrates how infrastructure, application workl
 It also reinforces an important reliability principle: **restarting a stateful application should not mean losing its persistent data.**
 
 
-Bash
+
 
 ````
+Bash
+
 cat > README.md <<'EOF'
 # AWS Kubernetes Infrastructure Platform — Capstone
 
@@ -41,7 +43,9 @@ The project demonstrates reproducible infrastructure, container image publishing
 
 ## Architecture
 
-```text
+```
+
+text
                          Internet
                             |
                     AWS Application
