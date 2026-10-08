@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: metrics-server-version
+  namespace: kube-system
+  labels:
+    app.kubernetes.io/name: metrics-server
+    app.kubernetes.io/component: platform-addon
+    app.kubernetes.io/part-of: platform-capstone
+data:
+  version: "v0.9.0"
+  manifest: "https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.9.0/components.yaml"

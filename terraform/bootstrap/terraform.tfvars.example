@@ -1,0 +1,10 @@
+aws_region = "eu-west-1"
+
+project_name = "platform-capstone"
+
+tags = {
+  Project     = "platform-capstone"
+  Environment = "bootstrap"
+  ManagedBy   = "terraform"
+  Owner       = "Jamiu-Bakre"
+}
