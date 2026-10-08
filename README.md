@@ -22,11 +22,7 @@ Most importantly, the project demonstrates how infrastructure, application workl
 It also reinforces an important reliability principle: **restarting a stateful application should not mean losing its persistent data.**
 
 
-Bash
 
-````
-
-cat > README.md <<'EOF'
 # AWS Kubernetes Infrastructure Platform — Capstone
 
 **Author:** Jamiu Olatunji Bakre  
@@ -42,9 +38,7 @@ The project demonstrates reproducible infrastructure, container image publishing
 
 ## Architecture
 
-```
 
-text
                          Internet
                             |
                     AWS Application
@@ -74,7 +68,7 @@ text
                             |
                     Encrypted EBS gp3
                          20 GiB
-````
+
 
 ### Infrastructure overview
 
@@ -95,6 +89,7 @@ text
 * EBS CSI driver: Dynamically provisions encrypted EBS volumes for persistent Kubernetes storage.
 
 The ALB routes `/` to the frontend. The backend and PostgreSQL services use internal ClusterIP networking; this Ingress configuration does not expose `/api` publicly.
+
 
 ## Repository structure
 
@@ -138,6 +133,7 @@ Install and configure:
 
 Verify your tools and AWS identity:
 
+
 Bash
 
 ```
@@ -155,12 +151,14 @@ Use the AWS region `eu-west-1` consistently. Your AWS credentials should be prov
 
 Review the example configuration files before deploying:
 
+
 Bash
 
 ```
 cat terraform/bootstrap/terraform.tfvars.example
 cat terraform/environments/prod/terraform.tfvars.example
 ```
+
 
 Create local variable files from the examples and edit them for your AWS account and requirements:
 
